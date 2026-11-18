@@ -122,6 +122,20 @@ aberto e some em tela cheia (Windows) • hibernação da GPU configurável.
   (macOS), com uma conversa por arquivo em `chats/`. Nada é enviado para lugar nenhum
   além do seu próprio Hermes.
 
+## Créditos
+
+Este repositório é um **derivado** do **[Hermes Desktop](https://github.com/mackswendhell/hermes-desktop)**,
+criado por **[Macks Wendhell](https://github.com/mackswendhell)** — todo o app original (personagem,
+voz, túnel SSH, modo chat) é trabalho dele, e o histórico de commits original foi mantido.
+
+Mudanças desta versão, feitas por cima do original:
+
+- Camada extra de instruções, privada e opcional, só no modo chat (interruptor no menu da bandeja).
+- Rótulo de personalidade "Padrão — a personalidade do próprio agente".
+- `msedge-tts` atualizado para 2.1.1 (corrige o erro 403 do Edge TTS).
+- Notas de instalação com o Hermes em Docker Swarm e a persona Zoe: [NOTAS-DA-INSTALACAO.md](NOTAS-DA-INSTALACAO.md).
+
 ## Licença
 
-MIT — use, modifique e distribua à vontade.
+MIT — use, modifique e distribua à vontade. Copyright (c) 2026 Macks Wendhell (autor original);
+as alterações deste derivado seguem a mesma licença.

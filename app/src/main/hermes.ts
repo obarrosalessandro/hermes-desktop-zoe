@@ -73,8 +73,10 @@ function personaPrompt(persona: string, mode: 'voz' | 'chat' = 'voz'): string {
   return `${base}\n\n${CAVALEIRO_CORPO}\n${CAVALEIRO_TAMANHO[mode]}\n\nDisposição de hoje: ${humorDoDia()}`;
 }
 
-export function chatSystemPrompt(persona: string): string {
-  return personaPrompt(persona, 'chat');
+export function chatSystemPrompt(persona: string, extra = ''): string {
+  const base = personaPrompt(persona, 'chat');
+  const camada = extra.trim();
+  return camada ? `${base}\n\n${camada}` : base;
 }
 
 export async function testBridge(settings: Settings): Promise<{ ok: boolean; message: string }> {

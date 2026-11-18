@@ -304,7 +304,7 @@ const EDGE_VOICES: { label: string; id: string }[] = [
 
 const PERSONA_LABELS: { label: string; id: Persona }[] = [
   { label: 'Cavaleiro — servo leal em missão', id: 'cavaleiro' },
-  { label: 'Normal — assistente direto', id: 'normal' },
+  { label: 'Padrão — a personalidade do próprio agente', id: 'normal' },
 ];
 
 const THEMES: { label: string; id: string }[] = [
@@ -522,6 +522,21 @@ function buildMenu(): Menu {
           },
         })),
       },
+      // camada extra de instruções (texto do próprio dono, nas configurações): só no chat
+      ...(settings.uiMode === 'chat' && settings.chatExtraPrompt.trim()
+        ? [
+            {
+              label: 'Camada extra no chat (privada)',
+              type: 'checkbox' as const,
+              checked: settings.chatExtraOn,
+              click: (item: Electron.MenuItem) => {
+                settings.chatExtraOn = item.checked;
+                saveSettings(settings);
+                refreshTrayMenu();
+              },
+            },
+          ]
+        : []),
       ...overlayOnly,
       {
         label: 'Cor',
@@ -874,7 +889,10 @@ function setupIpc(): void {
           {
             attachments: req.attachments,
             sessionId: chat.sessionId,
-            system: chatSystemPrompt(settings.chatPersona),
+            system: chatSystemPrompt(
+              settings.chatPersona,
+              settings.chatExtraOn ? settings.chatExtraPrompt : '',
+            ),
             signal: controller.signal,
             onSessionId: (id) => {
               const perdeu = Boolean(chat.sessionId) && chat.sessionId !== id && chat.msgs.length > 0;

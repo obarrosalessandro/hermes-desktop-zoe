@@ -33,6 +33,10 @@ export interface Settings {
   uiMode: 'overlay' | 'chat';
   chatBounds?: { x: number; y: number; width: number; height: number };
   chatPinned: boolean;
+  /** instruções extras que o dono escreve e que só entram no modo chat (vazio = sem camada) */
+  chatExtraPrompt: string;
+  /** interruptor da camada extra; só vale no modo chat */
+  chatExtraOn: boolean;
 }
 
 const defaults: Settings = {
@@ -61,6 +65,8 @@ const defaults: Settings = {
   activeChatId: '',
   uiMode: 'overlay',
   chatPinned: false,
+  chatExtraPrompt: '',
+  chatExtraOn: false,
 };
 
 // com túnel SSH ativo, a API do Hermes aparece em localhost
